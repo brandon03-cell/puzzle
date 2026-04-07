@@ -1,4 +1,3 @@
-
 *,
 *::before,
 *::after {
@@ -8,143 +7,166 @@
 }
 
 :root {
-  --color-fondo: #f5f5f0;
-  --color-superficie: #ffffff;
-  --color-pieza: #3b5bdb;
-  --color-pieza-hover: #2f4ac4;
-  --color-pieza-texto: #ffffff;
-  --color-vacia: #e0ddd5;
-  --color-borde: #c8c5bc;
-  --color-encabezado: #1a1a2e;
-  --color-texto-secundario: #666660;
-  --color-footer: #aaa;
-  --radio: 10px;
-  --tamano-tablero: 320px;
-  --tamano-pieza: calc(var(--tamano-tablero) / 3);
+  --fondo: #f5f5f0;
+  --superficie: #ffffff;
+  --borde: rgba(0, 0, 0, 0.1);
+  --tablero-bg: #e8e6e0;
+  --texto: #1a1a2e;
+  --texto-muted: #666660;
+  --radio-tablero: 16px;
+  --radio-ficha: 10px;
+  --tamano-ficha: 100px;
   --gap: 6px;
-  --sombra: 0 4px 12px rgba(0, 0, 0, 0.12);
-  --sombra-pieza: 0 2px 6px rgba(59, 91, 219, 0.25);
 }
 
-/* =============================================
-   BODY Y LAYOUT GENERAL
-   ============================================= */
 body {
   font-family: 'Segoe UI', system-ui, sans-serif;
-  background-color: var(--color-fondo);
-  color: var(--color-encabezado);
+  background-color: var(--fondo);
+  color: var(--texto);
   min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 2rem;
+  gap: 1.5rem;
   padding: 2rem 1rem;
 }
 
-/* =============================================
-   HEADER
-   ============================================= */
-header {
+.cabecera {
   text-align: center;
 }
 
-h1 {
+.cabecera h1 {
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: -0.5px;
-  color: var(--color-encabezado);
 }
 
-.subtitulo {
+.cabecera p {
   margin-top: 0.4rem;
   font-size: 1rem;
-  color: var(--color-texto-secundario);
+  color: var(--texto-muted);
 }
 
-/* =============================================
-   MAIN
-   ============================================= */
-main {
+.stats {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
+  gap: 2rem;
 }
 
-/* =============================================
-   TABLERO
-   ============================================= */
+.stat {
+  text-align: center;
+}
+
+.stat-val {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.stat-lbl {
+  font-size: 0.75rem;
+  color: var(--texto-muted);
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 .tablero {
   display: grid;
-  grid-template-columns: repeat(3, var(--tamano-pieza));
-  grid-template-rows: repeat(3, var(--tamano-pieza));
+  grid-template-columns: repeat(3, var(--tamano-ficha));
+  grid-template-rows: repeat(3, var(--tamano-ficha));
   gap: var(--gap);
-  background-color: var(--color-vacia);
-  border-radius: var(--radio);
+  background-color: var(--tablero-bg);
+  border-radius: var(--radio-tablero);
   padding: var(--gap);
-  box-shadow: var(--sombra);
-  border: 1px solid var(--color-borde);
+  border: 1px solid var(--borde);
 }
 
-/* =============================================
-   PIEZAS
-   ============================================= */
-.pieza {
-  background-color: var(--color-pieza);
-  color: var(--color-pieza-texto);
-  border-radius: calc(var(--radio) - 2px);
+.ficha {
+  border-radius: var(--radio-ficha);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   font-weight: 700;
-  cursor: default;
+  cursor: pointer;
+  color: #ffffff;
   user-select: none;
-  box-shadow: var(--sombra-pieza);
-  transition: background-color 0.15s ease, transform 0.1s ease;
+  transition: transform 0.12s ease, opacity 0.12s ease;
 }
 
-.pieza:hover {
-  background-color: var(--color-pieza-hover);
-  transform: scale(1.03);
+.ficha:hover {
+  transform: scale(1.06);
 }
 
-.pieza.vacia {
-  background-color: transparent;
-  box-shadow: none;
+.ficha:active {
+  transform: scale(0.96);
+}
+
+.ficha.vacia {
+  background: transparent !important;
   cursor: default;
+  pointer-events: none;
 }
 
-.pieza.vacia:hover {
-  background-color: transparent;
+.ficha.vacia:hover {
   transform: none;
 }
 
-/* =============================================
-   NOTA Y FOOTER
-   ============================================= */
-.nota {
-  font-size: 0.85rem;
-  color: var(--color-texto-secundario);
-  text-align: center;
+.ficha.ganada {
+  cursor: default;
+  animation: pulso 0.5s ease;
 }
 
-footer {
-  text-align: center;
-  font-size: 0.8rem;
-  color: var(--color-footer);
+@keyframes pulso {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
 }
 
-/* =============================================
-   RESPONSIVE
-   ============================================= */
+.mensaje {
+  font-size: 1rem;
+  font-weight: 600;
+  min-height: 1.4rem;
+  text-align: center;
+  color: var(--texto);
+}
+
+.acciones {
+  display: flex;
+  gap: 0.75rem;
+}
+
+button {
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--borde);
+  background-color: var(--superficie);
+  color: var(--texto);
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+button:hover {
+  background-color: var(--tablero-bg);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
 @media (max-width: 400px) {
   :root {
-    --tamano-tablero: 270px;
+    --tamano-ficha: 84px;
   }
 
-  h1 {
+  .cabecera h1 {
     font-size: 1.5rem;
   }
 }
