@@ -1,0 +1,24 @@
+h1{ color:blue
+
+}
+
+#contenedor{
+    background-color: gray;
+    width: 300px;
+    height: 300px;
+}
+
+.primera{
+    background-color: orange;
+    width: 100px;
+    height: 50px;
+    position: absolute;
+}
+
+.segunda {
+    background-color: brown;
+    width: 100px;
+    height: 50px;
+    margin-left: 100px;
+    position: absolute;   
+}
