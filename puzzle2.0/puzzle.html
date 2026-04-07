@@ -3,40 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="puzzle.css" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Puzzle deslizante</title>
   </head>
   <body>
-    <header>
-      <h1>Puzzle deslizante</h1>
-      <p class="subtitulo">Ordena las piezas del 1 al 8</p>
-    </header>
+    <div class="app">
+      <header class="cabecera">
+        <h1>Puzzle deslizante</h1>
+        <p>Mueve las fichas hasta ordenarlas del 1 al 8</p>
+      </header>
 
-    <main>
-      <div class="tablero" role="grid" aria-label="Tablero del puzzle">
-
-        <!-- Fila 1 -->
-        <div class="pieza" role="gridcell">1</div>
-        <div class="pieza" role="gridcell">2</div>
-        <div class="pieza" role="gridcell">3</div>
-
-        <!-- Fila 2 -->
-        <div class="pieza" role="gridcell">4</div>
-        <div class="pieza vacia" role="gridcell" aria-label="Espacio vacío"></div>
-        <div class="pieza" role="gridcell">5</div>
-
-        <!-- Fila 3 -->
-        <div class="pieza" role="gridcell">6</div>
-        <div class="pieza" role="gridcell">7</div>
-        <div class="pieza" role="gridcell">8</div>
-
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-val" id="movs">0</div>
+          <div class="stat-lbl">movimientos</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val" id="tiempo">0:00</div>
+          <div class="stat-lbl">tiempo</div>
+        </div>
       </div>
 
-      <p class="nota">Este puzzle es solo HTML y CSS — sin JavaScript.</p>
-    </main>
+      <div class="tablero" id="tablero" role="grid" aria-label="Tablero del puzzle"></div>
 
-    <footer>
-      <p>Proyecto de aprendizaje · Mejorado en 2025</p>
-    </footer>
+      <p class="mensaje" id="mensaje" aria-live="polite"></p>
+
+      <div class="acciones">
+        <button id="btnMezclar">Mezclar</button>
+        <button id="btnReset">Reiniciar</button>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
   </body>
 </html>
